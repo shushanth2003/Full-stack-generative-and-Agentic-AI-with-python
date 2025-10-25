@@ -305,4 +305,98 @@ This table outlines the key differences between `@classmethod` and `@staticmetho
 | **Access to `cls`** | ✅ Yes | ❌ No |
 | **Access to `self`** | ❌ No | ❌ No |
 
+Perfect 👏 — let’s explain **`@property` decorator** and how **getter & setter** work in Python clearly.
+
+---
+
+## 🔹 What is `@property`?
+
+* `@property` is a **decorator** that allows you to **access a method like an attribute**.
+* It is used to define a **getter** for a class attribute so you can control how the value is retrieved.
+* This makes your code cleaner — you don’t need explicit `getSomething()` methods like in Java.
+
+---
+
+### 🔹 Basic Getter Example:
+
+```python
+class Student:
+    def __init__(self, marks):
+        self._marks = marks  # private variable
+
+    @property
+    def marks(self):
+        return self._marks   # getter method
+```
+
+**Usage:**
+
+```python
+s = Student(85)
+print(s.marks)  # access like an attribute, not a method
+```
+
+✅ Output:
+
+```
+85
+```
+
+---
+
+## 🔹 Setter with `@<property_name>.setter`
+
+* After defining a property (getter), you can define a **setter** for the same property.
+* This allows you to **control how values are updated**, e.g., add validation.
+
+```python
+class Student:
+    def __init__(self, marks):
+        self._marks = marks
+
+    @property
+    def marks(self):
+        return self._marks
+
+    @marks.setter
+    def marks(self, value):
+        if 0 <= value <= 100:
+            self._marks = value
+        else:
+            raise ValueError("Marks must be between 0 and 100")
+```
+
+**Usage:**
+
+```python
+s = Student(85)
+s.marks = 90        # setter is called
+print(s.marks)      # getter is called
+s.marks = 120       # raises ValueError
+```
+
+---
+
+### 🔹 Key Points:
+
+| Feature      | Python Syntax                  | Java Equivalent                                  |
+| ------------ | ------------------------------ | ------------------------------------------------ |
+| Getter       | `@property` decorator          | `getSomething()`                                 |
+| Setter       | `@<property>.setter` decorator | `setSomething(value)`                            |
+| Access style | `obj.attribute`                | `obj.getSomething()` / `obj.setSomething(value)` |
+| Private var  | `_attribute` (convention)      | `private attribute`                              |
+
+---
+
+### 🔹 Why use property decorators?
+
+1. **Encapsulation** → safely control attribute access.
+2. **Cleaner code** → access like normal attributes.
+3. **Validation** → can add checks when setting values.
+4. **Read-only attributes** → just define getter, skip setter.
+
+---
+
+
+
 
