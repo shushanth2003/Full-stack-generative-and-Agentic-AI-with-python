@@ -4,4 +4,5 @@ class Chai:
 chai=Chai();
 print("Before Attributes : ",chai.temperature);
 # after initial attributes
-print("After Attributes : ",chai.hot);
+chai.temperature+=1;
+print("After Attributes : ",chai.temperature);
