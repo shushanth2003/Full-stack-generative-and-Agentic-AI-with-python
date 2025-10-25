@@ -293,6 +293,16 @@ Python uses the **C3 Linearization Algorithm** to determine MRO:
 
 ---
 
+# Python Class Methods Comparison
 
+This table outlines the key differences between `@classmethod` and `@staticmethod` in Python.
+
+| Feature | `@classmethod` | `@staticmethod` |
+| :--- | :--- | :--- |
+| **Decorator** | `@classmethod` | `@staticmethod` |
+| **First Parameter** | Receives `cls` (the class itself) automatically. | Receives **no** automatic first argument. |
+| **Primary Use Case** | Operations that need access to the class state (e.g., alternative constructors). | Utility functions that are logically grouped with the class but don't need access to the class or instance state. |
+| **Access to `cls`** | ✅ Yes | ❌ No |
+| **Access to `self`** | ❌ No | ❌ No |
 
 
