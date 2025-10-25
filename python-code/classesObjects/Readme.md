@@ -212,6 +212,87 @@ Type: Mammal
 3. You can also directly access base class members using the **class name**, like `Animal.display_type(self)`, but `super()` is preferred.
 
 ---
+Excellent — your example is **perfect** for understanding the **MRO (Method Resolution Order)** in Python! 👏
 
-Would you like me to show an example with **multiple inheritance** too?
+Let’s go step by step.
+
+---
+
+### 🔹 What is MRO?
+
+**MRO (Method Resolution Order)** defines **the order in which Python looks for methods or attributes** when you call them on an object in a class hierarchy (especially in **multiple inheritance**).
+
+---
+
+### 🔹 Your Code:
+
+```python
+class A:
+    label = "Labeling class : A"
+
+class B(A):
+    label = "Labeling class : B"
+
+class C(A):
+    label = "Labeling class : C"
+
+class D(B, C):
+    label = "Labeling class : D"
+
+cup = D()
+print(cup.label)
+print(D.__mro__)
+```
+
+---
+
+### 🔹 Step-by-step execution:
+
+1. **When you create `cup = D()`**, Python makes an object of class `D`.
+
+2. **When you call `cup.label`**, Python checks where to find `label`.
+   It searches classes in **MRO order** — **the sequence Python follows to find attributes and methods.**
+
+---
+
+### 🔹 The MRO of `D` is:
+
+```python
+(<class '__main__.D'>, <class '__main__.B'>, <class '__main__.C'>, <class '__main__.A'>, <class 'object'>)
+```
+
+That means:
+
+```
+D → B → C → A → object
+```
+
+---
+
+### 🔹 So what happens when you call `cup.label`?
+
+* Python looks in `D` first → finds `label = "Labeling class : D"` ✅
+* So, it stops searching further.
+
+Hence output:
+
+```
+Labeling class : D
+(<class '__main__.D'>, <class '__main__.B'>, <class '__main__.C'>, <class '__main__.A'>, <class 'object'>)
+```
+
+---
+
+### 🔹 Summary of MRO Rule:
+
+Python uses the **C3 Linearization Algorithm** to determine MRO:
+
+* It ensures a consistent and predictable search order.
+* Child classes are checked **before** parent classes.
+* The **leftmost base class** is checked first in multiple inheritance.
+
+---
+
+
+
 
