@@ -1,7 +1,10 @@
 from google import genai
+from dotenv import load_dotenv
+import os
+load_dotenv()
 
 client = genai.Client(
-    api_key="AIzaSyAAjQ6RnB9vOR077tygqlW-XKs0a61R1Ng"
+    api_key=os.getenv("API_KEY")
 )
 
 response = client.models.generate_content(
