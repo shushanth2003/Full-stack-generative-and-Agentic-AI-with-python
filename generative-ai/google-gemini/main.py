@@ -7,14 +7,14 @@ client = OpenAI(
     api_key=os.getenv("API_KEY"),
     base_url="https://generativelanguage.googleapis.com/v1beta/openai/"
 )
-
+SYSTEM_PROMPT="You need to assist only coding in this session if someone asked about irrelated about coding just tell sorry no need any explaination got it"
 response = client.chat.completions.create(
     model="gemini-2.5-flash",
     messages=[
-        {"role": "system", "content": "You need assist only math related content if the content is not related math content please assist sorry content is not related"},
+        {"role": "system", "content":SYSTEM_PROMPT},
         {
             "role": "user",
-            "content": "Hi, Myself Shushanth"
+            "content": "write the java code for fibonnaci series"
         }
     ]
 )
